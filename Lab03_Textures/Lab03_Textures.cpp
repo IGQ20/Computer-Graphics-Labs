@@ -155,9 +155,9 @@ int main( void )
     static const float uv[] = {
         // u    v      index
         0.0f,  0.0f,  // 0
-        1.0f,  0.0f,  // 1
-        1.0f,  1.0f,  // 2
-        0.0f,  1.0f,  // 3
+        6.0f,  0.0f,  // 1
+        6.0f,  4.0f,  // 2
+        0.0f,  4.0f,  // 3
     };
 
     // Define indices
