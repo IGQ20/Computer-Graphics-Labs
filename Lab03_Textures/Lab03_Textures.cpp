@@ -56,12 +56,15 @@ int main( void )
 	// Ensure we can capture keyboard inputs
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     
-    // Define vertices
-    const float vertices[] = {
+    // Define vertex positions
+    static const float vertices[] = {
         // x     y     z
         -0.5f, -0.5f, 0.0f,
          0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
+         0.5f,  0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
+         0.5f,  0.5f, 0.0f,
+        -0.5f,  0.5f, 0.0f
     };
   
     // Create the Vertex Array Object (VAO)
@@ -103,11 +106,14 @@ int main( void )
     stbi_image_free(data);
 
     // Define texture coordinates
-    const float uv[] = {
-        // u   v
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-        0.5f, 1.0f
+    static const float uv[] = {
+        // u    v
+        0.0f,  0.0f,    // triangle 1
+        1.0f,  0.0f,
+        1.0f,  1.0f,
+        0.0f,  0.0f,    // triangle 2
+        1.0f,  1.0f,
+        0.0f,  1.0f
     };
 
     // Create texture buffer
