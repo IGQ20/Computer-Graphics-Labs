@@ -57,19 +57,24 @@ int main(void)
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
     // Define vertices
-    const float vertices[] = {
-        // x     y     z
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
+   // Define vertices
+    static const float vertices[] = {
+        -0.9f, -0.5f, 0.0f,   // triangle 1
+        -0.1f, -0.5f, 0.0f,
+        -0.5f,  0.5f, 0.0f,
+         0.1f, -0.5f, 0.0f,   // triangle 2
+         0.9f, -0.5f, 0.0f,
+         0.5f,  0.5f, 0.0f
     };
 
     // Define vertex colours
-    const float colours[] = {
-        // R   G     B
+    static const float colours[] = {
+        1.0f, 0.0f, 0.0f,    // triangle 1 (red)
         1.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f
+        1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,    // triangle 2 (blue)
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
     };
 
     // Create the Vertex Array Object (VAO)
@@ -123,9 +128,8 @@ int main(void)
             0,         // stride
             (void*)0); // offset
 
-        // Draw the triangle
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        glDisableVertexAttribArray(0);
+        // Draw the triangles
+        glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / (3 * sizeof(float)));
 
         // Swap buffers
         glfwSwapBuffers(window);
