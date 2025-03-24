@@ -78,6 +78,47 @@ int main( void )
     // Compile shader program
     unsigned int shaderID;
     shaderID = LoadShaders("vertexShader.glsl", "fragmentShader.glsl");
+
+    // Create and bind texture
+    unsigned int texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    // Load texture image from file
+    const char* path = "../assets/crate.jpg";
+    int width, height, nChannels;
+    stbi_set_flip_vertically_on_load(true);
+    unsigned char* data = stbi_load(path, &width, &height, &nChannels, 0);
+
+    if (data)
+        std::cout << "Texture loaded." << std::endl;
+    else
+        std::cout << "Texture not loaded. Check the path." << std::endl;
+
+    // Specify 2D texture
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    // Free the image from the memory
+    stbi_image_free(data);
+
+    // Define texture coordinates
+    const float uv[] = {
+        // u   v
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        0.5f, 1.0f
+    };
+
+    // Create texture buffer
+    unsigned int uvBuffer;
+    glGenBuffers(1, &uvBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(uv), uv, GL_STATIC_DRAW);
+
+    // Bind the texture to the VAO
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindVertexArray(VAO);
     
     // Use the shader program
     glUseProgram(shaderID);
@@ -96,6 +137,11 @@ int main( void )
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+        // Send the UV buffer to the shaders
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
         
         // Draw the triangle
         glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / sizeof(float));
