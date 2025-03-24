@@ -59,9 +59,9 @@ int main(void)
     // Define vertices
     const float vertices[] = {
         // x     y     z
-        0.0f, -0.5f, 0.0f,
-         1.0f, -0.5f, 0.0f,
-         0.5f,  0.5f, 0.0f
+        -0.5f, 0.5f, 0.0f,
+         0.5f, 0.5f, 0.0f,
+         0.0f,  -0.5f, 0.0f
     };
 
     // Define vertex colours
