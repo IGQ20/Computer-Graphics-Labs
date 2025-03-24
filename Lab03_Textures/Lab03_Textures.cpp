@@ -135,9 +135,9 @@ int main( void )
     static const float uv[] = {
         // u    v      index
         0.0f,  0.0f,  // 0
-        1.0f,  0.0f,  // 1
-        1.0f,  1.0f,  // 2
-        0.0f,  1.0f,  // 3
+        2.0f,  0.0f,  // 1
+        2.0f,  2.0f,  // 2
+        0.0f,  2.0f,  // 3
     };
 
     // Define indices
@@ -161,6 +161,8 @@ int main( void )
     // Bind the texture to the VAO
     glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(VAO);
+
+
     
     // Use the shader program
     glUseProgram(shaderID);
