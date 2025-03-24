@@ -123,9 +123,16 @@ int main( void )
 
     GL_LINEAR_MIPMAP_LINEAR - uses linear texture filtering on a linear interpolation between two mipmaps.
     */
-    //Texture Wrapping
+    /*
+    * //Texture Wrapping
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    */
+
+
+    // Load the textures
+    unsigned int texture1 = loadTexture("../assets/crate.jpg");
+    unsigned int texture2 = loadTexture("../assets/mario.png");
 
     // Free the image from the memory
     stbi_image_free(data);
@@ -148,9 +155,9 @@ int main( void )
     static const float uv[] = {
         // u    v      index
         0.0f,  0.0f,  // 0
-        2.0f,  0.0f,  // 1
-        2.0f,  2.0f,  // 2
-        0.0f,  2.0f,  // 3
+        1.0f,  0.0f,  // 1
+        1.0f,  1.0f,  // 2
+        0.0f,  1.0f,  // 3
     };
 
     // Define indices
@@ -175,7 +182,16 @@ int main( void )
     glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(VAO);
 
+    // Send the texture uniforms to the fragment shader
+    glUseProgram(shaderID);
+    glUniform1i(glGetUniformLocation(shaderID, "texture1"), 0);
+    glUniform1i(glGetUniformLocation(shaderID, "texture2"), 1);
 
+    // Bind the textures
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture2);
     
     // Use the shader program
     glUseProgram(shaderID);
