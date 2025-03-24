@@ -61,15 +61,23 @@ int main(void)
         // x     y     z
         -0.5f, -0.5f, 0.0f,
         -0.5f,  0.5f, 0.0f,
-         0.5f,  0.0f, 0.0f
+         0.5f,  0.5f, 0.0f,
+         // x     y     z
+      0.5f, 0.5f, 0.0f,
+      0.5f,  -0.5f, 0.0f,
+       -0.5f,  -0.5f, 0.0f
     };
 
     // Define vertex colours
     const float colours[] = {
         // R   G     B
-        1.0f, 0.0f, 0.0f,
         0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f
+        0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        // R   G     B
+     0.0f, 1.0f, 0.0f,
+     0.0f, 1.0f, 0.0f,
+     0.0f, 1.0f, 0.0f
     };
 
     // Create the Vertex Array Object (VAO)
@@ -123,9 +131,8 @@ glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
             0,         // stride
             (void*)0); // offset
 
-        // Draw the triangle
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        glDisableVertexAttribArray(0);
+        // Draw the triangles
+        glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / (3 * sizeof(float)));
 
         // Swap buffers
         glfwSwapBuffers(window);
