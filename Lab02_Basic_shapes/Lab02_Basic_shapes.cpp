@@ -59,9 +59,9 @@ int main(void)
     // Define vertices
     const float vertices[] = {
         // x     y     z
-        -0.5f, 0.5f, 0.0f,
-         0.5f, 0.5f, 0.0f,
-         0.0f,  -0.5f, 0.0f
+        -0.5f, -0.5f, 0.0f,
+        -0.5f,  0.5f, 0.0f,
+         0.5f,  0.0f, 0.0f
     };
 
     // Define vertex colours
@@ -90,9 +90,9 @@ int main(void)
     glBufferData(GL_ARRAY_BUFFER, sizeof(colours), colours, GL_STATIC_DRAW);
 
     // Send the colour buffer to the shaders
-    glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, colourBuffer);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+glEnableVertexAttribArray(1);
+glBindBuffer(GL_ARRAY_BUFFER, colourBuffer);
+glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
     // Compile shader program
     unsigned int shaderID = LoadShaders("vertexShader.glsl", "fragmentShader.glsl");
